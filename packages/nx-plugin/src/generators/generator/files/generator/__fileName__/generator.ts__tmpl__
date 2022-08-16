@@ -14,7 +14,7 @@ interface NormalizedSchema extends <%= className %>GeneratorSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
-  parsedTags: string[]
+  parsedTags: string[];
 }
 
 function normalizeOptions(tree: Tree, options: <%= className %>GeneratorSchema): NormalizedSchema {
@@ -37,7 +37,7 @@ function normalizeOptions(tree: Tree, options: <%= className %>GeneratorSchema):
   };
 }
 
-function addFiles(tree: Tree, options: NormalizedSchema) {
+function addFiles(tree: Tree, options: NormalizedSchema): void {
     const templateOptions = {
       ...options,
       ...names(options.name),
@@ -47,7 +47,7 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
 }
 
-export default async function (tree: Tree, options: <%= className %>GeneratorSchema) {
+export default async function (tree: Tree, options: <%= className %>GeneratorSchema): Promise<void> {
   const normalizedOptions = normalizeOptions(tree, options);
   addProjectConfiguration(
     tree,
